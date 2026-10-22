@@ -1,0 +1,1 @@
+{"name":"@guti-ai-labs/openjar","version":"0.1.0","type":"module","license":"MIT","description":"Small self-hosted click and scroll heatmaps. No input capture or session replay.","exports":{"./tracker":"./tracker.mjs","./server":"./server.mjs"},"scripts":{"test":"node --test tests/*.test.mjs"},"engines":{"node":">=22.13"}}
