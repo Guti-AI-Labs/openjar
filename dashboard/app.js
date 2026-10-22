@@ -47,8 +47,11 @@ function drawPreview() {
     frame.style.transform = `scale(${scale})`;
     frame.style.left = `${-box.left * scale}px`; frame.style.top = `${-box.top * scale}px`;
     $('heat').replaceChildren();
+    $('heat').style.width = `${w}px`; $('heat').style.height = `${h}px`;
     if (!window.h337) throw Error('Heatmap renderer did not load');
-    const heatmap = window.h337.create({ container: $('heat'), radius: 24, maxOpacity: 0.72, minOpacity: 0.06, blur: 0.85 });
+    const heatmap = window.h337.create({ container: $('heat'), width: w, height: h, radius: 24, maxOpacity: 0.72, minOpacity: 0.06, blur: 0.85 });
+    // heatmap.js sets its container to relative; retain the overlay position.
+    $('heat').style.position = 'absolute';
     const points = data.clicks.filter(p => p.section === $('section').value);
     heatmap.setData({ max: Math.max(1, ...points.map(p => p.count)), data: points.map(p => ({ x: Math.round((p.x + .5) / 50 * w), y: Math.round((p.y + .5) / 100 * h), value: p.count })) });
   } catch { $('map-note').textContent = 'The page preview could not load. Counts and scroll depth are still available. Refresh to retry.'; }
